@@ -1,6 +1,4 @@
 # ZEN -a personal blog
-<br>
-<br>
 
 ## Overview
 This is an idea and a prototype of personal blog built using **Django**. This blog contains
