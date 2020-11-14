@@ -1,10 +1,8 @@
-<h1 style="text-align: center;border:none;margin-bottom:0">ZEN</h1>
-<h3 style="text-align: center">A Personal Blog</h3>
+# ZEN -a personal blog
 <br>
 <br>
 
 ## Overview
----
 This is an idea and a prototype of personal blog built using **Django**. This blog contains
 * **Home page**, where it lists
     * all the blog posts by latest first.
