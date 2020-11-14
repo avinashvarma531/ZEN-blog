@@ -25,7 +25,7 @@ def home(request):
         'tags': tags,
         'popular_posts': popular
     }
-    return render(request, 'blog/post_list.html', context)
+    return render(request, 'blog/home.html', context)
 
 # specific article page
 class PostDetailView(DetailView):
@@ -62,4 +62,4 @@ def tag_posts(request, **kwargs):
         'tags': all_tags,
         'popular_posts': popular_posts
     }
-    return render(request, 'blog/post_list.html', context)
+    return render(request, 'blog/home.html', context)
