@@ -1,0 +1,86 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{% block title %}Home - {% endblock title%}
+
+{% block content %}
+<div class="home">
+            
+    {% include 'blog/header.html' %}
+    
+    <div class="banner">
+        <img src="{% static 'blog/images/banner.gif' %}" alt="">
+        <div class="banner-heading">
+            "Open your mind and let the knowledge flow through it."
+        </div>
+    </div>
+    <div id="post-container" class="container-fluid my-5">
+        <div class="row">
+            <div class="col-lg-7 offset-lg-1 col-sm-12">
+                <div class="post-container">
+                    {% for post in posts %}
+                        <div class="post">
+                            <div class="tags">  
+                                {% for tag in post.tags.all %}
+                                    <a href="{% url 'tag-posts' tag %}" class="tag d-inline-block p-1">{{ tag }}</a>
+                                {% endfor %}
+                            </div>
+                            <div class="date ml-1">{{ post.date_posted|date:"M d, Y" }}</div>
+                            <h3 class="title"><a href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h3>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="paginator text-center my-3">
+                    <div class="wrapper">
+                        {% if posts.has_previous %}
+                            <a href="?page={{ posts.previous_page_number }}" class="d-inline-block mx-1 btn">prev</a>
+                        {% endif %}
+
+                        {% for page in posts.paginator.page_range %}
+                            {% if page == posts.number %}
+                                <a href="?page={{ page }}" class="d-inline-block mx-1 btn btn-active">{{ page }}</a>
+                            {% elif page < posts.number|add:-2 and page > posts.number|add:2 %}
+                                <a href="?page={{ page }}" class="d-inline-block mx-1 btn">{{page}}</a>
+                            {% endif %}
+                        {% endfor %}
+                        
+                        {% if posts.has_next %}
+                            <a href="?page={{ posts.next_page_number }}" class="d-inline-block mx-1 btn">next</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-12">
+                <div class="container-fluid aside-container">
+                    <div class="tags-container mb-4">
+                        <h2 class="p-2 mb-2">Tags</h2>
+                        <div class="wrapper">
+                            <div class="tags">
+                                {% for tag in tags %}
+                                    <a href="{% url 'tag-posts' tag %}" class="tag d-inline-block p-1">{{ tag }}</a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="popular-container mb-4">
+                        <h2 class="p-2 mb-2">Popular</h2>
+                        <div class="wrapper">
+                            {% for post in popular_posts %}
+                                <a href="{% url 'post-detail' post.id %}" class="title d-block p-1 mb-2">{{ post.title }}</a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <!-- <div class="news-letter text-center">
+                        <h1>News Letter</h1>
+                        <p class="font-italic">subscribe to get latest posts straight to your inbox.</p>
+                        <form method="POST">
+                            <input type="email" placeholder="Your email">
+                            <button type="submit" role="button" class="btn my-2">Subscribe</button>
+                        </form>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

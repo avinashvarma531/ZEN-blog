@@ -1,0 +1,13 @@
+{% load static %}
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="{% url 'blog-home' %}"><img src="{% static 'blog/images/zen.svg' %}" alt="LOGO"></a>
+            </div>
+            <ul class="navigation-list">
+                <li><a href="{% url 'blog-home' %}" class="navigation-list-item">Home</a></li>
+                <li><a href="{% url 'blog-about' %}" class="navigation-list-item">About</a></li>
+                <li><a href="{% url 'blog-contact' %}" class="navigation-list-item">Contact</a></li>
+            </ul>
+        </nav>
+    </header>

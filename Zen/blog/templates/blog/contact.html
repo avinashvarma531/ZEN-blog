@@ -1,0 +1,48 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}Contact - {% endblock title%}
+
+{% block content %}
+    <div class="contact">
+        {% include 'blog/header.html' %}
+    
+        <div class="container contact-container">
+            {% if messages %}
+                {% for msg in messages %}
+                    <div class="message p-2 mb-4 text-center alert alert-dismissible alert-{{ msg.tags }} fade show">
+                        <button type="button" class="close p-2" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        {{ msg }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+            <div class="row">
+                <div class="contact-msg col-md-8 col-sm-12">
+                    <h1 class="heading">Something to say?</h1>
+                    <form method="POST" class="contact-form">
+                        {% csrf_token %}
+                        <label for="contact-name">Name</label>
+                        <input id="contact-name" class="contact-name" type="text" name="name" placeholder="Your Name" required>
+                        <label for="contact-email">Email</label>
+                        <input id="contact-email" class="contact-email" type="email" name="email-id" placeholder="Your Email-id" required>
+                        <label for="contact-msg">Message</label>
+                        <textarea id="contact-msg" class="contact-msg" name="message" placeholder="Your message" required></textarea>
+                        <div class="form-button">
+                            <button type="submit" class="btn contact-button">Send <i class="fas fa-paper-plane d-"></i></button>
+                        </div>
+                    </form>
+                </div>
+                <div class="contact-details col-md-4 col-sm-12">
+                    <h3>Reach me at</h3>
+                    <ul class="social-media">
+                        <li><a target="_blank" href="https://github.com/avinashvarma531"><i class="fab icon fa-2x fa-github"></i></a></li>
+                        <li><a target="_blank" href="https://www.linkedin.com/in/avinash-polepalli/"><i class="fab icon fa-2x fa-linkedin"></i></a></li>
+                        <li><a target="_blank" href="https://codepen.io/Avinash_Varma/"><i class="fab icon fa-2x fa-codepen"></i></a></li>
+                        <li><a target="_blank" href="https://dribbble.com/avinashvarma531"><i class="fab icon fa-2x fa-dribbble"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

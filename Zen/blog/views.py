@@ -1,0 +1,53 @@
+from django.shortcuts import render, redirect
+from .models import Post, Tag
+from django.views.generic import DetailView
+from django.core.paginator import Paginator
+from django.contrib import messages
+
+
+def home(request):
+    posts = Post.objects.all().order_by('-date_posted')
+    tags = Tag.objects.all().order_by('name')
+    popular = Post.objects.all().order_by('-claps')[:3]
+
+    paginator = Paginator(posts, 6)
+    page_num = request.GET.get('page')
+    page_obj = paginator.get_page(page_num)
+
+    context = {
+        'posts': page_obj,
+        'tags': tags,
+        'popular_posts': popular
+    }
+    return render(request, 'blog/post_list.html', context)
+
+class PostDetailView(DetailView):
+    model = Post
+    context_object_name = 'post'
+    
+def about_view(request):
+    return render(request, 'blog/about.html')
+
+def contact_view(request):
+    if request.method == 'POST':
+        print(f'\n{request.POST.get("name")}\n{request.POST.get("email-id")}\n{request.POST.get("message")}\n')
+        messages.success(request, 'Thank you for your interest! You will be replied quickly')
+        return redirect('blog-contact')
+    return render(request, 'blog/contact.html')
+
+def tag_posts(request, **kwargs):
+    tag_name = kwargs['name']
+    posts = Tag.objects.get(name=tag_name).post_set.all().order_by('-date_posted')
+    tags = Tag.objects.all().order_by('name')
+    popular = Post.objects.all().order_by('-claps')[:3]
+
+    paginator = Paginator(posts, 6)
+    page_num = request.GET.get('page')
+    page_obj = paginator.get_page(page_num)
+
+    context = {
+        'posts': page_obj,
+        'tags': tags,
+        'popular_posts': popular
+    }
+    return render(request, 'blog/post_list.html', context)
