@@ -20,6 +20,6 @@ This is an idea and a prototype of personal blog built using **Django**. This bl
 
 > Note: All the content inside the blog posts is taken from external sources. 
 > References for content in articles
-> * [Real python]("https://realpython.com/")
-> * [W3Schools]("https://www.w3schools.com/")
-> * [LogRocket]("https://logrocket.com/")
+> * [Real python](https://realpython.com/)
+> * [W3Schools](https://www.w3schools.com/)
+> * [LogRocket](https://logrocket.com/)
